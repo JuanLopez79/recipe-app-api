@@ -13,7 +13,11 @@ COPY ./app /app
 WORKDIR /app
 EXPOSE 8000
 
-ENV DEV=false
+# Se cambio a ARG para poder pasar el test de Github Actions.
+# Esto se debe a que args permite instalar las dependencias de desarrollo.
+# ENV no permite descargar dependencias de desarrollo.
+# ENV DEV=false
+ARG DEV=false 
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
     /py/bin/pip install -r /tmp/requirements.txt && \
